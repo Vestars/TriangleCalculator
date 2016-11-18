@@ -24,6 +24,13 @@
         <processorPath useClasspath="true" />
         <module name="pifagor-calc" />
       </profile>
+      <profile default="false" name="Annotation profile for pifagor-triangle-calculator" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pifagor-triangle-calculator" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="pifagor-calc" target="1.7" />

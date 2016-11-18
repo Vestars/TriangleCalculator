@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class CalculatorController {
 
+    private final String version = "0.0.1";
+
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public ModelAndView calculatorPage() {
         ModelAndView modelAndView = new ModelAndView();
