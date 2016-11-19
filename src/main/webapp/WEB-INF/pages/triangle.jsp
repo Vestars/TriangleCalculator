@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -44,6 +45,8 @@
                 <div class="form-group">
                     <form:input type="text" class="form-control" id="c" name="c" path="c" value="${c}" readonly="true"/>
                 </div>
+                <hr>
+                <div class="col-xs-offset-11"><p>v <spring:message code="version"></spring:message> </p></div>
             </form:form>
         </div>
     </div>
