@@ -23,7 +23,6 @@ public class CalculatorController {
 
         model.addAttribute("a_error", "a must be > 0");
         model.addAttribute("b_error", "b must be > 0");
-        model.addAttribute("empty_fields", "Fields can't be empty");
 
         return "triangle";
     }
