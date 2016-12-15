@@ -1,37 +1,30 @@
 package com.eutacompany.controller;
 
-import com.eutacompany.figure.Triangle;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.processing.SupportedSourceVersion;
-import java.io.IOException;
-import java.util.Properties;
 
 @Controller
 @RequestMapping("/")
 public class CalculatorController {
 
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    public ModelAndView calculatorPage() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("triangle",new Triangle());
-        modelAndView.setViewName("triangle");
-        return modelAndView;
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String calculatorPage() {
+        return "triangle";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ModelAndView calculateTriangle(@ModelAttribute("triangle") Triangle triangle) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("triangle");
-        modelAndView.addObject("triangle", triangle);
-        int c = triangle.hypotenuse(triangle.getA(),triangle.getB());
-        return modelAndView;
+    public String calculateTriangle(Model model, double a, double b) {
+        model.addAttribute("a", a);
+        model.addAttribute("b", b);
+        double c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+        model.addAttribute("c", c);
+
+        model.addAttribute("a_error", "a must be > 0");
+        model.addAttribute("b_error", "b must be > 0");
+        model.addAttribute("empty_fields", "Fields can't be empty");
+
+        return "triangle";
     }
 }

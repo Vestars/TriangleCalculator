@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -32,24 +32,52 @@
                 <br>
                 Input values(example): input: a = 3, b = 4; out: c = 5;
             </p>
-            <form:form class="form-inline" modelAttribute="triangle" method="post">
+            <form class="form-inline" action="/" method="post">
+                <c:if test="${a <= 0}">
+                    <p class="bg-danger">
+                        <c:out value="${a_error}"></c:out>
+                        <br>
+                    </p>
+                </c:if>
+                <c:if test="${b <= 0}">
+                    <p class="bg-danger">
+                        <c:out value="${b_error}"></c:out>
+                        <br>
+                    </p>
+                </c:if>
                 <div class="form-group">
                     <label for="a">Side a:</label>
-                    <form:input type="text" class="form-control" id="a" name="a" placeholder="Enter value" path="a" value="${a}"/>
+                    <input type="text" class="form-control" id="a" name="a" onkeyup="checkParams()" placeholder="Enter value" value="${a}"/>
                 </div>
                 <div class="form-group">
                     <label for="b"> + Side b:</label>
-                    <form:input type="text" class="form-control" id="b" name="b" placeholder="Enter value" path="b" value="${b}"/>
+                    <input type="text" class="form-control" id="b" name="b" onkeyup="checkParams()" placeholder="Enter value" value="${b}"/>
                 </div>
-                <button type="submit" class="btn btn-default">=</button>
+                    <button id="submit" type="submit" class="btn btn-default" disabled="disabled">=</button>
                 <div class="form-group">
-                    <form:input type="text" class="form-control" id="c" name="c" path="c" value="${c}" readonly="true"/>
+                    <input type="text" class="form-control" id="c" name="c" value="${c}" readonly="true"/>
                 </div>
                 <hr>
                 <div class="col-xs-offset-11"><p>v <spring:message code="version"></spring:message> </p></div>
-            </form:form>
+            </form>
         </div>
     </div>
 </div>
+<script>
+    function checkParams() {
+        var a = $('#a').val();
+        var b = $('#b').val();
+
+        if(a.length != 0 && b.length != 0) {
+            if(!isNaN(a) && !isNaN(b)){
+            $('#submit').removeAttr('disabled');
+            }else{
+                $('#submit').attr('disabled', 'disabled');
+            }
+        } else {
+            $('#submit').attr('disabled', 'disabled');
+        }
+    }
+</script>
 </body>
 </html>
